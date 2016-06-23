@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Plugin.Geolocator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
@@ -13,7 +14,16 @@ namespace AlmostHereXamarin
 		public App ()
 		{
             // The root page of your application
+
             MainPage = new AlmostHereMap();
+
+            var locator = CrossGeolocator.Current;
+            locator.StartListeningAsync(minTime: 30000, minDistance: 0, includeHeading: true);
+            locator.PositionChanged += (sender, e) => {
+                        var position = e.Position;
+                Console.WriteLine("we moved");
+        };
+
         }
 
 		protected override void OnStart ()

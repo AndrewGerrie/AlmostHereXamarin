@@ -6,6 +6,7 @@ using System.Text;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
+using Plugin.Geolocator;
 
 namespace AlmostHereXamarin
 {
@@ -25,6 +26,9 @@ namespace AlmostHereXamarin
             var stack = new StackLayout { Spacing = 0 };
             stack.Children.Add(map);
             Content = stack;
+
+            Console.WriteLine("map rendered");
+
         }
     }
 }
