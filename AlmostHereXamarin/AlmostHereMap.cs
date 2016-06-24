@@ -15,6 +15,7 @@ namespace AlmostHereXamarin
 	public class AlmostHereMap : ContentPage
 	{
        static Map map;
+        static Label speed;
 
         public AlmostHereMap ()
         {
@@ -27,8 +28,17 @@ namespace AlmostHereXamarin
                 WidthRequest = 960,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
-            var stack = new StackLayout { Spacing = 0 };
+
+            speed = new Label
+            {
+                Text = "Currently Traveling at 0 MPH",
+                FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+            };
+            var stack = new StackLayout { Spacing = 10 };
             stack.Children.Add(map);
+            stack.Children.Add(speed);
             Content = stack;
 
             Console.WriteLine("map rendered");
@@ -38,14 +48,12 @@ namespace AlmostHereXamarin
         internal static void updateMap(Plugin.Geolocator.Abstractions.Position currentPos)
         {
 
-            Console.WriteLine("incoming lat" + currentPos.Latitude);
-
             Distance zoom = new Distance(500);
             Position userLocation = new Position(currentPos.Latitude, currentPos.Longitude);
 
             map.MoveToRegion(MapSpan.FromCenterAndRadius(userLocation, zoom));
+            speed.Text = "Currently Traveling at " + currentPos.Speed + " MPH";
 
-            Console.WriteLine("moving map to " + userLocation.Latitude);
         }
 
    

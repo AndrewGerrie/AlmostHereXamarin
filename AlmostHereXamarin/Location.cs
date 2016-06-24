@@ -11,8 +11,6 @@ namespace AlmostHereXamarin
 
         internal static void updateUserLocation(Position pos)
         {
-
-            Console.WriteLine("speed" + pos.Speed);
             ServerInteraction.updateRemoteLocation(pos.Longitude, pos.Latitude, pos.Speed);
             updateMap(pos);
         }
