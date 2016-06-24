@@ -7,14 +7,18 @@ using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Plugin.Geolocator;
+using AlmostHereXamarin;
 
 namespace AlmostHereXamarin
 {
+  
 	public class AlmostHereMap : ContentPage
 	{
-		public AlmostHereMap ()
+       static Map map;
+
+        public AlmostHereMap ()
         {
-            var map = new Map(
+             map = new Map(
                 MapSpan.FromCenterAndRadius(
                         new Position(1, 1), Distance.FromMiles(1000)))
             {
@@ -30,6 +34,22 @@ namespace AlmostHereXamarin
             Console.WriteLine("map rendered");
 
         }
+
+        internal static void updateMap(Plugin.Geolocator.Abstractions.Position currentPos)
+        {
+
+            Console.WriteLine("incoming lat" + currentPos.Latitude);
+
+            Distance zoom = new Distance(500);
+            Position userLocation = new Position(currentPos.Latitude, currentPos.Longitude);
+
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(userLocation, zoom));
+
+            Console.WriteLine("moving map to " + userLocation.Latitude);
+        }
+
+   
+
     }
 }
 

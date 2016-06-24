@@ -19,6 +19,7 @@ namespace AlmostHereXamarin
 
         internal static void updateMap(Position CurrentPos)
         {
+            AlmostHereMap.updateMap(CurrentPos);
 
         }
     }
