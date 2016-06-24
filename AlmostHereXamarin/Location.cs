@@ -8,6 +8,7 @@ namespace AlmostHereXamarin
 {
     class Location
     {
+        internal string _id;
 
         internal static void updateUserLocation(Position pos)
         {

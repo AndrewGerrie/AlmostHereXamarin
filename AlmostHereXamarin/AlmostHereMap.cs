@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
-using Plugin.Geolocator;
-using AlmostHereXamarin;
+using System.Threading.Tasks;
+using Plugin.Share;
 
 namespace AlmostHereXamarin
 {
-  
-	public class AlmostHereMap : ContentPage
+
+    public class AlmostHereMap : ContentPage
 	{
-       static Map map;
+        static Map map;
         static Label speed;
 
         public AlmostHereMap ()
@@ -36,9 +32,21 @@ namespace AlmostHereXamarin
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
             };
-            var stack = new StackLayout { Spacing = 10 };
+
+            Button share = new Button
+            {
+                Text = "Share Tracking Link",
+                Font = Font.SystemFontOfSize(NamedSize.Large),
+                BorderWidth = 1,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.CenterAndExpand
+            };
+
+            share.Clicked += OnButtonClicked;
+            var stack = new StackLayout { Spacing = 5 };
             stack.Children.Add(map);
             stack.Children.Add(speed);
+            stack.Children.Add(share);
             Content = stack;
 
             Console.WriteLine("map rendered");
@@ -56,7 +64,12 @@ namespace AlmostHereXamarin
 
         }
 
-   
+        void OnButtonClicked(object sender, EventArgs e)
+        {
+            CrossShare.Current.ShareLink("blah", "Share your tracking link", "Almost Here Tracking Link");
+        }
+
+
 
     }
 }
