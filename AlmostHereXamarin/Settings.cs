@@ -9,6 +9,7 @@ namespace AlmostHereXamarin
         public static string API = "http://api.almosthe.re";
         public static string getNewSessionPath = "/newSession";
         public static string cryptoKey = "test";
+        public static string getUpdatePath = "/location/";
         
     }
 }

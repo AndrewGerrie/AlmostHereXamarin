@@ -11,24 +11,34 @@ namespace AlmostHereXamarin
     class ServerInteraction
     {
 
-        public static int getSessionId()
+        public static string getSessionId()
         {
             var postData = "{}";
 
             var res = HttpHelper.makePostRequest(Settings.API + Settings.getNewSessionPath, postData);
             Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string, string>>(res);
-            
-            Console.WriteLine("DB id " + values["_id"]);
-            // 2
 
- 
-
-            return 0;
+            return values["_id"];
 
         }
 
-        internal static void updateRemoteLocation(double longitude, double latitude, double speed)
+        internal static void updateRemoteLocation(double longitude, double latitude, double speed, String SessionID)
         {
+
+            Dictionary<string, string> location =
+                new Dictionary<string, String>();
+
+            location.Add("longitude", longitude.ToString());
+            location.Add("latitude", latitude.ToString());
+            location.Add("speed", speed.ToString());
+            location.Add("_id", SessionID);
+
+            string json = JsonConvert.SerializeObject(location);
+
+            Console.WriteLine(json);
+
+            HttpHelper.makePutRequest(Settings.API + Settings.getUpdatePath + SessionID, json);
+
         }
 
 

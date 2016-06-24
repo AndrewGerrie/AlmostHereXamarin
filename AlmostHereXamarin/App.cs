@@ -11,17 +11,19 @@ namespace AlmostHereXamarin
 {
 	public class App : Application
 	{
-        int SessionId;
+        public string SessionId;
 		public App ()
 		{
 
             MainPage = new AlmostHereMap();
             var locator = CrossGeolocator.Current;
+            String sessionId = ServerInteraction.getSessionId();
+
             locator.StartListeningAsync(minTime: 30000, minDistance: 0, includeHeading: true);
             locator.PositionChanged += (sender, e) => {
-                Location.updateUserLocation(e.Position);
+                Location.updateUserLocation(e.Position, sessionId);
         };
-            SessionId = ServerInteraction.getSessionId();
+
 
         }
 

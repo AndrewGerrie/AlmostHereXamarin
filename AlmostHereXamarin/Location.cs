@@ -10,9 +10,9 @@ namespace AlmostHereXamarin
     {
         internal string _id;
 
-        internal static void updateUserLocation(Position pos)
+        internal static void updateUserLocation(Position pos,String sessionId)
         {
-            ServerInteraction.updateRemoteLocation(pos.Longitude, pos.Latitude, pos.Speed);
+            ServerInteraction.updateRemoteLocation(pos.Longitude, pos.Latitude, pos.Speed, sessionId);
             updateMap(pos);
         }
 
