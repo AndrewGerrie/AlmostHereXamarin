@@ -13,15 +13,13 @@ namespace AlmostHereXamarin
 	{
 		public App ()
 		{
-            // The root page of your application
 
             MainPage = new AlmostHereMap();
-
+     
             var locator = CrossGeolocator.Current;
             locator.StartListeningAsync(minTime: 30000, minDistance: 0, includeHeading: true);
             locator.PositionChanged += (sender, e) => {
-                        var position = e.Position;
-                Console.WriteLine("we moved");
+                Location.updateUserLocation(e.Position);
         };
 
         }
