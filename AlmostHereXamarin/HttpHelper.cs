@@ -33,7 +33,6 @@ namespace AlmostHereXamarin
 
         public static String makePutRequest(String Url, String putData)
         {
-            Console.WriteLine("path" + Url);
             var request = (HttpWebRequest)WebRequest.Create(Url);
 
             var data = Encoding.ASCII.GetBytes(putData);

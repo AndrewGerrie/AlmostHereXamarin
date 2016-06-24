@@ -23,8 +23,6 @@ namespace AlmostHereXamarin
             locator.PositionChanged += (sender, e) => {
                 Location.updateUserLocation(e.Position, sessionId);
         };
-
-
         }
 
 		protected override void OnStart ()
